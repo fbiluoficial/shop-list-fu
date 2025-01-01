@@ -3,6 +3,7 @@ import { Search, Trash2 } from "lucide-react";
 import { ShoppingListItem } from "@/components/ShoppingListItem";
 import { AddItemForm } from "@/components/AddItemForm";
 import { useToast } from "@/components/ui/use-toast";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface Item {
   id: string;
@@ -89,9 +90,12 @@ const Index = () => {
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 text-primary animate-glow">
-          Lista de Compras Futurista
-        </h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary animate-glow">
+            Lista de Compras Futurista
+          </h1>
+          <ThemeToggle />
+        </div>
 
         <div className="glass rounded-lg p-4 mb-6">
           <div className="relative">
