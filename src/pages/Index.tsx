@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, Trash2 } from "lucide-react";
 import { ShoppingListItem } from "@/components/ShoppingListItem";
 import { AddItemForm } from "@/components/AddItemForm";
@@ -13,10 +13,20 @@ interface Item {
   completed: boolean;
 }
 
+const STORAGE_KEY = "shopping-list-items";
+
 const Index = () => {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Item[]>(() => {
+    const savedItems = localStorage.getItem(STORAGE_KEY);
+    return savedItems ? JSON.parse(savedItems) : [];
+  });
   const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
+
+  // Save to localStorage whenever items change
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+  }, [items]);
 
   const addItem = (name: string, category?: string, date?: string) => {
     const newItem: Item = {
